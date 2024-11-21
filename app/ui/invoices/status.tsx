@@ -21,7 +21,7 @@ export default function InvoiceStatus({ status }: { status: string }) {
       {status === 'paid' ? (
         <>
           Paid
-          <CheckIcon className="ml-1 w-4 text-white" />
+          <CheckIcon className="ml-1 w-4 text-white" />41`1
         </>
       ) : null}
     </span>
