@@ -1,6 +1,7 @@
 "use server";
 import { z } from "zod"; //typescript validation library
 import { sql } from '@vercel/postgres'
+import { revalidatePath } from "next/cache";
 
 const FormSchema = z.object({
   id: z.string(),
@@ -23,5 +24,7 @@ export async function createInvoice(formData: FormData) {
 
   await sql`
     INSERT INTO invoices (customer_id, amount, status, date)
-    VALUES (${customerId}, ${amountInCents}, ${status}, ${date})`
+    VALUES (${customerId}, ${amountInCents}, ${status}, ${date})`;
+
+    revalidatePath('/dashboard/invoices')
 }
