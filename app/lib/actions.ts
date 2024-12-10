@@ -37,16 +37,12 @@ export async function createInvoice(prevState: State, formData: FormData) {
   });
 
   // return errors if form validation fails. Otherwise, continue.
-  if(!validatedFields.success) {
+  if (!validatedFields.success) {
     // console.log(validatedFields)
     return {
-      
       errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Invoice',
-      
-
-    }
-    
+      message: "Missing Fields. Failed to Create Invoice",
+    };
   }
   // preping data for insertion into database
   const { customerId, amount, status } = validatedFields.data;
@@ -71,13 +67,28 @@ export async function createInvoice(prevState: State, formData: FormData) {
 
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
-export async function updateInvoice(id: string, formData: FormData) {
-  const { customerId, amount, status } = UpdateInvoice.parse({
+export async function updateInvoice(
+  id: string,
+  prevState: State,
+  formData: FormData
+) {
+  const validatedFields = updateInvoice.safeParse({
     customerId: formData.get("customerId"),
     amount: formData.get("amount"),
     status: formData.get("status"),
   });
+
+  //return errors if form validation fails - otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Update Invoice",
+    };
+  }
+  //prepare data for reinsertion in database
+  const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
+  // const data = new Date().toISOString().split("T"[0]);
 
   try {
     await sql`
