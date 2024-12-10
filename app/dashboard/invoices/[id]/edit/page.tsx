@@ -27,9 +27,12 @@ export default async function Page(props: {params: Promise<{id: string}> }) {
           },
         ]}
       />
-            {invoice && (
-        <Form invoice={invoice} customers={customers} />
-      )}
+        <Form invoice={{
+        id: '',
+        customer_id: '',
+        amount: 0,
+        status: 'pending'
+      }} customers={[]} />
     </main>
   );
 }
