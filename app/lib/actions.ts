@@ -72,7 +72,7 @@ export async function updateInvoice(
   prevState: State,
   formData: FormData
 ) {
-  const validatedFields = updateInvoice.safeParse({
+  const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get("customerId"),
     amount: formData.get("amount"),
     status: formData.get("status"),
@@ -88,7 +88,6 @@ export async function updateInvoice(
   //prepare data for reinsertion in database
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
-  // const data = new Date().toISOString().split("T"[0]);
 
   try {
     await sql`
@@ -101,7 +100,6 @@ export async function updateInvoice(
       message: "Database Error: Failed to update invoice.",
     };
   }
-
   revalidatePath("/dashboard/invoices");
   redirect("/dashboard/invoices");
 }
