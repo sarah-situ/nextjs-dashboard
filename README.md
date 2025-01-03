@@ -57,3 +57,20 @@ This reduces the overall loading time and prevents slow data requests from block
 ### 11. Handing Errors
 - Use `error.tsx` to catch errors and show a fallback UI to users.
 - How to use the `notFound` function and file to handle 404 errors (for resources that doesn't exist).
+
+### 12. Improve Accessibility
+- How to implement server-side form validation with Server Actions.
+- Display form errors using React's `useActionState` hook.
+- Use ESLint plugin in Next.js.
+
+### 13. Authentication
+- Setting up authentication with NextAuth.js.
+- Protecting routes with Next.js Middleware.
+- Password hashing before storing in the database.
+- How to use React's `useActionState` to handle pending states and form errors.
+
+### 14. Adding Metadata
+- Learning about the common types of metadata and their uses.
+- How to add an Open Graph image using metadata.
+- How to add a favicon using metadata.
+  
